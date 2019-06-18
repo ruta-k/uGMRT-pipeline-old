@@ -17,7 +17,6 @@ fromlta = False                               # If starting from lta file set it
 gvbinpath = ['./listscan','./gvfits']   # set the path to listscan and gvfits
 fromraw = False                               # True if starting from FITS data. Otherwise keep it False.
 fromms = False                                # True If working with multi-source MS file.
-myunflagall = False                          # Will unflagall, create dummy flag - relevant if you want to start off again on the same file.
 ######## find bad ants and freqs
 findbadants = False                           # find bad antennas when True
 flagbadants= False                           # find and flag bad antennas when True
@@ -79,6 +78,7 @@ uvrascal=''                                    # uvrange cutoff used in self-cal
 # You can choose to not change anything below this line if you are not familiar with this pipeline.
 ########################################################################################################################
 target = True                                 # Should be True when a target different from calibrators is being imaged. Leave it to true always.
+myunflagall = False                          # Will unflagall, create dummy flag - relevant if you want to start off again on the same file.
 ##################################################################
 #
 ##################################################################
