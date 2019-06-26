@@ -254,15 +254,26 @@ def mytclean(myfile,myniter,mythresh,srno,cell,imsize, mynterms1,mywproj):    # 
 	else:
 		myoutimg = 'selfcal'+'img'+str(srno)
 	default(tclean)
-	tclean(vis=myfile,
-       		imagename=myoutimg, selectdata= True, field='0', spw='0', imsize=imsize, cell=cell, robust=0, weighting='briggs', 
-       		specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
-#		minpsffraction=0.05,
-#		maxpsffraction=0.8,
-		smallscalebias=0.6, threshold= mythresh, aterm =True, pblimit=-1,
-	        deconvolver='mtmfs', gridder='widefield', wprojplanes=mywproj, scales=[0,10,25],wbawp=False,
-		restoration = True, savemodel='modelcolumn', cyclefactor = 0.5, parallel=False,
-       		interactive=False)
+	if mynterms1 > 1:
+		tclean(vis=myfile,
+       			imagename=myoutimg, selectdata= True, field='0', spw='0', imsize=imsize, cell=cell, robust=0, weighting='briggs', 
+       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
+#			minpsffraction=0.05,
+#			maxpsffraction=0.8,
+			smallscalebias=0.6, threshold= mythresh, aterm =True, pblimit=-1,
+	        	deconvolver='mtmfs', gridder='wproject', wprojplanes=mywproj, scales=[0,5,15],wbawp=False,
+			restoration = True, savemodel='modelcolumn', cyclefactor = 0.5, parallel=False,
+       			interactive=False)
+	else:
+		tclean(vis=myfile,
+       			imagename=myoutimg, selectdata= True, field='0', spw='0', imsize=imsize, cell=cell, robust=0, weighting='briggs', 
+       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
+#			minpsffraction=0.05,
+#			maxpsffraction=0.8,
+			smallscalebias=0.6, threshold= mythresh, aterm =True, pblimit=-1,
+	        	deconvolver='multiscale', gridder='wproject', wprojplanes=mywproj, scales=[0,5,15],wbawp=False,
+			restoration = Tre, savemodel='modelcolumn', cyclefactor = 0.5, parallel=False,
+       			interactive=False)
 #	if myniter >0:   # the next step is a work-around for a bug in tclean
 #		tclean(vis=myfile, imagename=myoutimg, field='0', spw='0',	imsize=imsize, cell=cell, robust=0, weighting='briggs', 
 #      		specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
@@ -392,7 +403,11 @@ def myselfcal(myfile,myref,nloops,nploops,myvalinit,mycellsize,myimagesize,mynte
 						myimg = myonlyclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # clean
 					else:
 						myimg = mytclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # tclean
-					exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')		
+					if mynterms2 > 1:
+						exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')
+					else:
+						exportfits(imagename=myimg+'.image', fitsimage=myimg+'.fits')
+
 			else:
 				myniter=int(myniterstart*2**i) #myniterstart*(2**i)  # niter is doubled with every iteration int(startniter*2**count)
 				if myniter > myniterend:
@@ -407,7 +422,10 @@ def myselfcal(myfile,myref,nloops,nploops,myvalinit,mycellsize,myimagesize,mynte
 						myimg = myonlyclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # clean
 					else:
 						myimg = mytclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # tclean
-					exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')		
+					if mynterms2 > 1:
+						exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')
+					else:
+						exportfits(imagename=myimg+'.image', fitsimage=myimg+'.fits')
 					myimages.append(myimg)	# list of all the images created so far
 					flagresidual(myfile[i],clipresid,'')
 					if i>0:
@@ -427,7 +445,10 @@ def myselfcal(myfile,myref,nloops,nploops,myvalinit,mycellsize,myimagesize,mynte
 						myimg = myonlyclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # clean
 					else:
 						myimg = mytclean(myfile[i],myniter,mythresh,i,mycellsize,myimagesize,mynterms2,mywproj1)   # tclean
-					exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')		
+					if mynterms2 > 1:
+						exportfits(imagename=myimg+'.image.tt0', fitsimage=myimg+'.fits')
+					else:
+						exportfits(imagename=myimg+'.image', fitsimage=myimg+'.fits')
 					myimages.append(myimg)	# list of all the images created so far
 					flagresidual(myfile[i],clipresid,'')
 					if i!= nscal:
