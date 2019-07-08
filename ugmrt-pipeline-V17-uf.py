@@ -15,20 +15,20 @@
 ###### SET THE STAGE FOR DATA ANALYSIS #############################
 fromlta = False                               # If starting from lta file set it True. Provide the lta file name and check that the gvfits binaries are given properly.
 gvbinpath = ['./listscan','./gvfits']   # set the path to listscan and gvfits
-fromraw = False                               # True if starting from FITS data. Otherwise keep it False.
-fromms = False                                # True If working with multi-source MS file.
+fromraw = True                               # True if starting from FITS data. Otherwise keep it False.
+fromms = True                                # True If working with multi-source MS file.
 ######## find bad ants and freqs
-findbadants = False                           # find bad antennas when True
-flagbadants= False                           # find and flag bad antennas when True
-findbadchans = False                          # find bad channels within known RFI affected freq ranges when True
-flagbadfreq= False                            # find and flag bad channels within known RFI affected freq ranges when True
+findbadants = True                           # find bad antennas when True
+flagbadants= True                           # find and flag bad antennas when True
+findbadchans = True                          # find bad channels within known RFI affected freq ranges when True
+flagbadfreq= True                            # find and flag bad channels within known RFI affected freq ranges when True
 ###################
-myflaginit = False                             # True to flag first channel, quack, initial clips
-doinitcal = False                              # True to calibrate data
-mydoflag = False                               # True to flag on the calibrated data
-redocal = False                                # True to redo calibration - recommended
+myflaginit = True                             # True to flag first channel, quack, initial clips
+doinitcal = True                              # True to calibrate data
+mydoflag = True                               # True to flag on the calibrated data
+redocal = True                                # True to redo calibration - recommended
 ##################
-dosplit = False                                # True to split calibrated data on target source
+dosplit = True                                # True to split calibrated data on target source
 mysplitflag = True                            # True to flag on the target source
 dosplitavg = True                             # True to average channels - set mywidth2 input below to choose how many channels to average
 doflagavg = True                              # True to flag on the channel averaged file  
@@ -61,7 +61,7 @@ mywidth2 = 10                                 # number of channels to average - 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Inputs for imaging and self-calibration : You will need to change relevant advanced controls if you change the values here.
 scaloops = 8                                   # Total number of self-cal loops (including both phase-only and amp-ph)
-mythresholds = 1.0                             # A starting thereshold- will reduce with scal iterations.              
+mythresholds = 0.1                             # A starting thereshold- will reduce with scal iterations.              
 mypcaloops = 4                                 # Number of p-only selfcal loops; should be <= scaloops. The remaning loops will and a&p self-cal.
 mycell = ['2.0arcsec']                         # Set the cellsize: for 610 MHz 0.5 or 1.0 arcsec, for 325 MHz 1.0 or 2.0 arcsec, 0.25 or 0.5 arcsec for 1.4 GHz will work.
 myimsize = [12000]                              # Set the size of the image in pixel units. Should cover the primary beam.
@@ -257,7 +257,7 @@ def mytclean(myfile,myniter,mythresh,srno,cell,imsize, mynterms1,mywproj):    # 
 	if mynterms1 > 1:
 		tclean(vis=myfile,
        			imagename=myoutimg, selectdata= True, field='0', spw='0', imsize=imsize, cell=cell, robust=0, weighting='briggs', 
-       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
+       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',minbeamfrac=0.1,
 #			minpsffraction=0.05,
 #			maxpsffraction=0.8,
 			smallscalebias=0.6, threshold= mythresh, aterm =True, pblimit=-1,
@@ -267,12 +267,12 @@ def mytclean(myfile,myniter,mythresh,srno,cell,imsize, mynterms1,mywproj):    # 
 	else:
 		tclean(vis=myfile,
        			imagename=myoutimg, selectdata= True, field='0', spw='0', imsize=imsize, cell=cell, robust=0, weighting='briggs', 
-       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',
+       			specmode='mfs',	nterms=mynterms1, niter=myniter, usemask='auto-multithresh',minbeamfrac=0.1,
 #			minpsffraction=0.05,
 #			maxpsffraction=0.8,
 			smallscalebias=0.6, threshold= mythresh, aterm =True, pblimit=-1,
 	        	deconvolver='multiscale', gridder='wproject', wprojplanes=mywproj, scales=[0,5,15],wbawp=False,
-			restoration = Tre, savemodel='modelcolumn', cyclefactor = 0.5, parallel=False,
+			restoration = True, savemodel='modelcolumn', cyclefactor = 0.5, parallel=False,
        			interactive=False)
 #	if myniter >0:   # the next step is a work-around for a bug in tclean
 #		tclean(vis=myfile, imagename=myoutimg, field='0', spw='0',	imsize=imsize, cell=cell, robust=0, weighting='briggs', 
