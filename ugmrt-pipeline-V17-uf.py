@@ -88,6 +88,7 @@ myunflagall = False                          # Will unflagall, create dummy flag
 
 def vislistobs(msfile):
 	'''Writes the verbose output of the task listobs.'''
+	os.system('rm '+msfile+'.list')
 	ms.open(msfile)  
 	outr=ms.summary(verbose=True,listfile=msfile+'.list')
 	return outr
