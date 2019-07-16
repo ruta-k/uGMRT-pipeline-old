@@ -513,8 +513,13 @@ if fromraw == True:
 if fromms == True:
 # fix channels in the file
 	mynchan = getnchan(myfile1)
-	print mynchan           
-	if mynchan == 2048:
+	print mynchan
+	if mynchan == 1024:
+		mygoodchans = '0:250~300'   # used for visstat
+		flagspw = '0:51~950'
+		gainspw = '0:101~900'
+		gainspw2 = ''   # central good channels after split file for self-cal	
+	elif mynchan == 2048:
 		mygoodchans = '0:500~600'   # used for visstat
 		flagspw = '0:101~1900'
 		gainspw = '0:201~1800'
