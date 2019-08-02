@@ -1,5 +1,5 @@
 # uGMRT-pipeline
-This is a continuum data reduction pipeline for the Upgraded GMRT.
+This is a continuum data reduction pipeline for the Upgraded GMRT developed by Ruta Kale and Ishwara Chandra.
 To run the pipeline:
 
 casa -c ugmrt-pipeline-V17-uf.py
