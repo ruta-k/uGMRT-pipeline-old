@@ -1,7 +1,28 @@
+# CAPTURE: A CAsa Pipeline-cum-Toolkit for Upgraded Giant Metrewave Radio Telescope data REduction
 # uGMRT-pipeline
 This is a continuum data reduction pipeline for the Upgraded GMRT developed by Ruta Kale and Ishwara Chandra.
 
-To use the pipeline:
+To use CAPTURE:
+
+1. Open capture-V0.py in a text editor. Change and save the settings as per your requirements.
+
+2. Run the pipeline using:
+
+casa -c capture-V0.py
+OR 
+
+execfile("capture-V0.py")
+
+############################################################################################
+CAVEATS for CAPTURE V0:
+
+Primary beam correction:
+The images produced by the pipeline are not corrected for the effect of the primary beam. You need to run the primary beam correction separately.
+
+###########################################################################################
+The early release version was ugmrt-pipeline-V17-uf.py (will not be updated anymore):
+
+To use the older version:
 1. Open ugmrt-pipeline-V17-uf.py in a text editor. Change and save the settings as per your requirements.
 
 2. Run the pipeline using:
@@ -12,9 +33,10 @@ OR
 
 execfile("ugmrt-pipeline-V17-uf.py")
 
+
 ###########################################################################################
 
-CAVEATS:
+CAVEATS for the older version:
 
 Absolute flux calibration:
 Perley - Butler 2013 is hardcoded in the pipeline at the moment as the pipeline was tested in CASA 5.1 where more recent calibration coefficients were not available. 
