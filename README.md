@@ -20,7 +20,7 @@ CAVEATS for CAPTURE V0:
 Primary beam correction:
 The images produced by the pipeline are not corrected for the effect of the primary beam. You need to run the primary beam correction separately.
 
-###########################################################################################
+############################################################################################
 The early release version was ugmrt-pipeline-V17-uf.py (will not be updated anymore):
 
 To use the older version:
