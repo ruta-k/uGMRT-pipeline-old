@@ -5,14 +5,14 @@ This is a continuum data reduction pipeline for the Upgraded GMRT developed by R
 
 To use CAPTURE:
 
-1. Open capture-V0.py in a text editor. Change and save the settings as per your requirements.
+1. Open capture-pipeline-V0.py in a text editor. Change and save the settings as per your requirements.
 
 2. Run the pipeline using:
 
-casa -c capture-V0.py
+casa -c capture-pipeline-V0.py
 OR 
 
-execfile("capture-V0.py")
+execfile("capture-pipeline-V0.py")
 
 ############################################################################################
 CAVEATS for CAPTURE V0:
