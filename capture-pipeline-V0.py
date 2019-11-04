@@ -382,8 +382,8 @@ def myapplycal(myfile,mygaintables):
 def flagresidual(myfile,myclipresid,myflagspw):
 	default(flagdata)
 	flagdata(vis=myfile, mode ='rflag', datacolumn="RESIDUAL_DATA", field='', timecutoff=6.0,  freqcutoff=6.0,
-		timefit="line", freqfit="line",	flagdimension="freqtime", extendflags=False, timedevscale=3.0,
-		freqdevscale=3.0, spectralmax=500.0, extendpols=False, growaround=False, flagneartime=False,
+		timefit="line", freqfit="line",	flagdimension="freqtime", extendflags=False, timedevscale=6.0,
+		freqdevscale=6.0, spectralmax=500.0, extendpols=False, growaround=False, flagneartime=False,
 		flagnearfreq=False, action="apply", flagbackup=True, overwrite=True, writeflags=True)
 	default(flagdata)
 	flagdata(vis=myfile, mode ='clip', datacolumn="RESIDUAL_DATA", clipminmax=myclipresid,
