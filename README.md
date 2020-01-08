@@ -17,6 +17,11 @@ execfile("capture-pipeline-V0.py")
 ############################################################################################
 CAVEATS for CAPTURE V0:
 
+LTA to FITS conversion:
+If you are starting from a "lta" file - you need to make sure that the listscan and gvfits are executable before starting to run the pipeline. You can convert these to executable files using the commands e.g.:
+$chmod +x listscan
+$chmod +x gvfits
+
 Primary beam correction:
 The images produced by the pipeline are not corrected for the effect of the primary beam. You need to run the primary beam correction separately.
 
