@@ -1,5 +1,5 @@
 Please use the new repositoy for the uGMRT pipeline : https://github.com/ruta-k/uGMRT-pipeline
-This repository will not be updated further.
+This repository will NOT be updated further. 
 
 # CAPTURE: A CAsa Pipeline-cum-Toolkit for Upgraded Giant Metrewave Radio Telescope data REduction
 
